@@ -1,203 +1,126 @@
 https://bankapp1133.streamlit.app/
 Click the above link to open application
 
+# 🏦 Streamlit Bank Application
 
-import streamlit as st
+## 📌 Overview
 
-# ---------------- Bank Class ----------------
-class BankApplication:
-    bank_name = "SBI"
+The **Streamlit Bank Application** is a simple banking simulation web application built using Python and Streamlit.
+It allows users to perform basic banking operations through an interactive web interface.
 
-    def __init__(self, name, account_number, age, mobile_number, balance):
-        self.name = name
-        self.account_number = account_number
-        self.age = age
-        self.mobile_number = mobile_number
-        self.balance = balance
+This project demonstrates how **Object-Oriented Programming (OOP)** concepts in Python can be integrated with a web interface using Streamlit to create a functional mini banking system.
 
-    def withdraw(self, amount):
-        if amount <= self.balance:
-            self.balance -= amount
-            return f"✅ Withdraw Successful: ₹{amount}"
-        return "❌ Insufficient Balance"
+The application provides a clean and interactive UI where users can create an account, deposit money, withdraw money, update mobile details, and check their account balance.
 
-    def deposit(self, amount):
-        self.balance += amount
-        return f"✅ Deposit Successful. Balance: ₹{self.balance}"
+---
 
-    def update_mobile(self, new_number):
-        self.mobile_number = new_number
-        return f"📱 Mobile Updated: {self.mobile_number}"
+## ✨ Features
 
-    def check_balance(self):
-        return f"💰 Balance: ₹{self.balance}"
+* 🧾 **Create Account** – Users can create a bank account by providing personal details.
+* 💰 **Deposit Money** – Add funds to the account balance.
+* 💸 **Withdraw Money** – Withdraw money with balance validation.
+* 📱 **Update Mobile Number** – Modify the registered mobile number.
+* 📊 **Check Balance** – View the current account balance.
+* 🎨 **Interactive Web UI** – Built with Streamlit for a smooth user experience.
 
+---
 
-# ---------------- Page Config ----------------
-st.set_page_config(page_title="Smart Bank", page_icon="🏦", layout="wide")
+## 🛠️ Technologies Used
 
-# ---------------- CSS Styling ----------------
-st.markdown("""
-<style>
+* **Python**
+* **Streamlit**
+* **Object-Oriented Programming (OOP)**
+* **Custom CSS for UI Styling**
 
-.stApp {
-background: linear-gradient(135deg,#1e3c72,#2a5298);
-color:white;
-}
+---
 
-.title{
-text-align:center;
-font-size:50px;
-font-weight:bold;
-margin-bottom:20px;
-}
+## 📂 Project Structure
 
-.subtitle{
-text-align:center;
-font-size:20px;
-margin-bottom:40px;
-}
+```
+bank-streamlit-app
+│
+├── app.py            # Main Streamlit application
+├── README.md         # Project documentation
+```
 
-.glass{
-background: rgba(255,255,255,0.1);
-padding:30px;
-border-radius:15px;
-backdrop-filter: blur(10px);
-box-shadow:0 8px 32px rgba(0,0,0,0.3);
-}
+---
 
-.stButton>button{
-background: linear-gradient(90deg,#ff9966,#ff5e62);
-color:white;
-border:none;
-border-radius:10px;
-height:45px;
-font-size:16px;
-font-weight:bold;
-width:100%;
-}
+## ⚙️ Installation
 
-.stButton>button:hover{
-transform: scale(1.05);
-transition:0.3s;
-}
+1. Clone the repository
 
-</style>
-""", unsafe_allow_html=True)
+```bash
+git clone https://github.com/your-username/bank-streamlit-app.git
+```
 
-# ---------------- Title ----------------
-st.markdown('<div class="title">🏦 Smart Bank</div>', unsafe_allow_html=True)
-st.markdown('<div class="subtitle">Secure • Fast • Modern Banking</div>', unsafe_allow_html=True)
+2. Navigate to the project folder
 
-# ---------------- Session Storage ----------------
-if "account" not in st.session_state:
-    st.session_state.account = None
+```bash
+cd bank-streamlit-app
+```
 
-# ---------------- Sidebar ----------------
-menu = st.sidebar.selectbox(
-    "Navigation",
-    ["Create Account","Deposit","Withdraw","Check Balance","Update Mobile"]
-)
+3. Install dependencies
 
-# ---------------- Create Account ----------------
-if menu == "Create Account":
+```bash
+pip install streamlit
+```
 
-    st.markdown('<div class="glass">', unsafe_allow_html=True)
+---
 
-    st.subheader("Create Your Bank Account")
+## ▶️ Running the Application
 
-    col1,col2 = st.columns(2)
+Run the Streamlit application using the following command:
 
-    with col1:
-        name = st.text_input("Full Name")
-        age = st.number_input("Age",min_value=1)
+```bash
+streamlit run app.py
+```
 
-    with col2:
-        account = st.text_input("Account Number")
-        mobile = st.text_input("Mobile Number")
+After running the command, the application will open in your browser at:
 
-    balance = st.number_input("Initial Deposit",min_value=0)
+```
+http://localhost:8501
+```
 
-    if st.button("Create Account"):
-        st.session_state.account = BankApplication(
-            name,account,age,mobile,balance
-        )
-        st.success("🎉 Account Created Successfully!")
+---
 
-    st.markdown('</div>', unsafe_allow_html=True)
+## 📸 Application Functionalities
 
-# ---------------- Deposit ----------------
-elif menu == "Deposit":
+The application allows users to:
 
-    st.markdown('<div class="glass">', unsafe_allow_html=True)
+1. Create a bank account
+2. Deposit funds
+3. Withdraw money
+4. Check account balance
+5. Update registered mobile number
 
-    st.subheader("Deposit Money")
+---
 
-    if st.session_state.account:
+## 🎯 Learning Objectives
 
-        amount = st.number_input("Amount",min_value=1)
+This project helps in understanding:
 
-        if st.button("Deposit"):
-            result = st.session_state.account.deposit(amount)
-            st.success(result)
+* Python class and object concepts
+* Integration of backend logic with a web UI
+* Building simple interactive web applications
+* Using Streamlit for rapid web development
 
-    else:
-        st.warning("Create account first")
+---
 
-    st.markdown('</div>', unsafe_allow_html=True)
+## 🚀 Future Improvements
 
-# ---------------- Withdraw ----------------
-elif menu == "Withdraw":
+Possible enhancements include:
 
-    st.markdown('<div class="glass">', unsafe_allow_html=True)
+* User authentication (Login & Signup)
+* Database integration (SQLite / MySQL)
+* Transaction history
+* Multi-user account management
+* Advanced dashboard UI
+* Data persistence
 
-    st.subheader("Withdraw Money")
+---
 
-    if st.session_state.account:
+## 👨‍💻 Author
 
-        amount = st.number_input("Amount",min_value=1)
+Developed as a learning project to explore **Python web applications using Streamlit**.
 
-        if st.button("Withdraw"):
-            result = st.session_state.account.withdraw(amount)
-            st.success(result)
-
-    else:
-        st.warning("Create account first")
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# ---------------- Check Balance ----------------
-elif menu == "Check Balance":
-
-    st.markdown('<div class="glass">', unsafe_allow_html=True)
-
-    st.subheader("Account Balance")
-
-    if st.session_state.account:
-        st.metric("Current Balance",
-                  f"₹{st.session_state.account.balance}")
-
-    else:
-        st.warning("Create account first")
-
-    st.markdown('</div>', unsafe_allow_html=True)
-
-# ---------------- Update Mobile ----------------
-elif menu == "Update Mobile":
-
-    st.markdown('<div class="glass">', unsafe_allow_html=True)
-
-    st.subheader("Update Mobile Number")
-
-    if st.session_state.account:
-
-        new_mobile = st.text_input("New Mobile Number")
-
-        if st.button("Update"):
-            result = st.session_state.account.update_mobile(new_mobile)
-            st.success(result)
-
-    else:
-        st.warning("Create account first")
-
-    st.markdown('</div>', unsafe_allow_html=True)
+---
